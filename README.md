@@ -2,6 +2,7 @@
 ## Docker container for InfluxDB
 
 See https://influxdb.com/docs/v0.8/introduction/overview.html for influxDB documentation
+
 Currently under early development, may not result in a functionnal container.
 
 
@@ -31,7 +32,7 @@ Usefull mountpoints are:
 Exposed ports are:
 * __:8083__ for admin interface
 * __:8086__ for API
-* __:8090__ and __:8099__ for cluster internals ÂProtobuf and Raft prococols)
+* __:8090__ and __:8099__ for cluster internals (Protobuf and Raft prococols)
 
 
 ## Included files
