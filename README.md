@@ -21,10 +21,10 @@ It means this container has:
 Usefull mountpoints are:
 * __/opt/influxdb/shared/__ - InfluxDB shared files, contains:
     * __/opt/influxdb/shared/config.toml__ - config file
-    * __/opt/influxdb/shared/log.txt(.[0-9]+)?__ - log files
     * __/opt/influxdb/shared/data/__ - data files
 * __/var/log__ - log files.
-    * __/var/log/supervisor__ - init system log files, traces container's process start/stop/restart.
+    * __/var/log/supervisor/__ - init system log files, traces container's process start/stop/restart
+    * __/var/log/influxdb/__ - influxdb log files
 
 
 ## Ports

@@ -19,6 +19,11 @@ RUN wget http://influxdb.s3.amazonaws.com/influxdb_0.8.8_amd64.deb -O /tmp/influ
 dpkg -i /tmp/influxdb.deb && \
 rm /tmp/influxdb.deb
 
+# Customize log path to /var/log/influxdb/
+RUN mkdir /var/log/influxdb
+RUN chown influxdb:influxdb /var/log/influxdb
+RUN sed -i -e 's/^file *= \".*\"/file = \"\/var\/log\/influxdb\/log.txt\"/g' /opt/influxdb/shared/config.toml
+
 # supervisord configuration
 RUN sed -i -e 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
 ADD configfiles/supervisor-influxdb.conf /etc/supervisor/conf.d/influxdb.conf
