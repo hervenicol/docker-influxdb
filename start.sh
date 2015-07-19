@@ -20,7 +20,8 @@ docker run -d -i -t \
 	-p "$EXPOSED_PORT_RAFT":8090 \
 	-p "$EXPOSED_PORT_API":8086 \
 	-p "$EXPOSED_PORT_ADMIN":8083 \
-	-p "$EXPOSED_PORT_COLLECTD":25826 \
+	-p "$EXPOSED_PORT_COLLECTD":25826/udp \
 	--name "$CONT_NAME" \
-	"$IMAGE_NAME":"$IMAGE_TAG"
+	"$IMAGE_NAME":"$IMAGE_TAG" && \
+wget -O- "http://localhost:$EXPOSED_PORT_API/db?u=root&p=root" --post-data '{"name": "collectd"}'
 
