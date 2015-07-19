@@ -32,6 +32,7 @@ Usefull mountpoints are:
 Exposed ports are:
 * __:8083__ for admin interface
 * __:8086__ for API
+* __:25826/udp__ for collectd
 * __:8090__ and __:8099__ for cluster internals (Protobuf and Raft prococols)
 
 
