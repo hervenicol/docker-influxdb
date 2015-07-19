@@ -46,6 +46,7 @@ Exposed ports are:
 
 ## First steps
 
-Here I should explain how to use this docker image and go straight to the point.
+Documentation on how to have a simple graphing setup can be found here:
 
+https://github.com/hervenicol/Graphing-suite/wiki
 
