@@ -15,38 +15,33 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq \
 	supervisor wget
 
 # InfluxDB install
-RUN wget http://influxdb.s3.amazonaws.com/influxdb_0.8.8_amd64.deb -O /tmp/influxdb.deb && \
+RUN wget -nv http://influxdb.s3.amazonaws.com/influxdb_0.9.2_amd64.deb -O /tmp/influxdb.deb && \
 	dpkg -i /tmp/influxdb.deb && \
 rm /tmp/influxdb.deb
-
-# Customize log path to /var/log/influxdb/
-RUN mkdir /var/log/influxdb && \
-	chown influxdb:influxdb /var/log/influxdb
-RUN sed -i -e 's/^file *= \".*\"/file = \"\/var\/log\/influxdb\/log.txt\"/g' /opt/influxdb/shared/config.toml
 
 
 
 #### Enable collectd
 
-# delete "input_plugins.collectd" section
-RUN sed -i -n -e '/./{H;$!d}' -e 'x;/\[input_plugins.collectd\]/!p' /opt/influxdb/shared/config.toml
-
-# Add our own section
-RUN sed -i 's/\[input_plugins\]/\
-\[input_plugins\]\n\
-  \# Configure the collectd api\n\
-  \[input_plugins.collectd\]\n\
+# delete "collectd" section
+# and add our own section
+RUN sed -i -n -e '/./{H;$!d}' -e 'x;/\[collectd\]/!p' /etc/opt/influxdb/influxdb.conf && \
+echo '\n\
+###\n\
+### [collectd]\n\
+###\n\
+### Controls the listener for collectd data.\n\
+###\n\
+\n\
+[collectd]\n\
   enabled = true\n\
-  \# address = "0.0.0.0" # If not set, is actually set to bind-address.\n\
-  port = 25826\n\
+  bind-address = ":25826"\n\
   database = "collectd"\n\
-  \# types.db can be found in a collectd installation or on github:\n\
-  \# https:\/\/github.com\/collectd\/collectd\/blob\/master\/src\/types.db\n\
-  typesdb = "\/opt\/influxdb\/shared\/collectd_types.db" # The path to the collectd types.db file\n\
-/g' /opt/influxdb/shared/config.toml
+  typesdb = "/etc/opt/influxdb/collectd_types.db"\n\
+' >> /etc/opt/influxdb/influxdb.conf
 
 # Retrieve the types.db file
-RUN wget --no-check-certificate -O /opt/influxdb/shared/collectd_types.db https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
+RUN wget -nv --no-check-certificate -O /etc/opt/influxdb/collectd_types.db https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
 
 #### Collectd connector setup done
 
