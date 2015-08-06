@@ -1,7 +1,7 @@
 # docker-influxdb
 ## Docker container for InfluxDB
 
-See https://influxdb.com/docs/v0.8/introduction/overview.html for influxDB documentation
+See https://influxdb.com/docs/v0.9/introduction/overview.html for influxDB documentation
 
 Currently under early development, may not result in a functionnal container.
 
