@@ -6,7 +6,7 @@
 
 #### Configuration ####
 IMAGE_NAME="hervenicol/influxdb"
-IMAGE_TAG="0.9.2"
+IMAGE_TAG="0.9.3"
 CONT_NAME="influxdb"
 #PORT_PROTOBUF="8099"
 #PORT_RAFT="8090"
