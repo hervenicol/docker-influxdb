@@ -15,7 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq \
 	supervisor wget
 
 # InfluxDB install
-RUN wget -nv http://influxdb.s3.amazonaws.com/influxdb_0.9.3_amd64.deb -O /tmp/influxdb.deb && \
+RUN wget -nv http://s3.amazonaws.com/influxdb/influxdb_0.9.4.2_amd64.deb -O /tmp/influxdb.deb && \
 	dpkg -i /tmp/influxdb.deb && \
 rm /tmp/influxdb.deb
 
