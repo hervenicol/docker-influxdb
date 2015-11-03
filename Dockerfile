@@ -42,6 +42,7 @@ echo '\n\
 
 # Retrieve the types.db file
 ADD https://raw.githubusercontent.com/collectd/collectd/master/src/types.db /etc/opt/influxdb/collectd_types.db
+RUN chmod 644 /etc/opt/influxdb/collectd_types.db
 
 #### Collectd connector setup done
 
