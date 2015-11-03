@@ -15,8 +15,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq \
 	supervisor wget
 
 # InfluxDB install
-RUN wget -nv http://s3.amazonaws.com/influxdb/influxdb_0.9.4.2_amd64.deb -O /tmp/influxdb.deb && \
-	dpkg -i /tmp/influxdb.deb && \
+ADD http://s3.amazonaws.com/influxdb/influxdb_0.9.4.2_amd64.deb /tmp/influxdb.deb 
+RUN dpkg -i /tmp/influxdb.deb && \
 rm /tmp/influxdb.deb
 
 
@@ -41,7 +41,7 @@ echo '\n\
 ' >> /etc/opt/influxdb/influxdb.conf
 
 # Retrieve the types.db file
-RUN wget -nv --no-check-certificate -O /etc/opt/influxdb/collectd_types.db https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
+ADD https://raw.githubusercontent.com/collectd/collectd/master/src/types.db /etc/opt/influxdb/collectd_types.db
 
 #### Collectd connector setup done
 
